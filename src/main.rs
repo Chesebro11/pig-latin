@@ -1,12 +1,19 @@
-// Convert string to pig latin, maybe I should do this based off of user input?
-// user inputs a string and that gets translated to pig latin
-// What kind of issues could come from this?
-// Would have to either limit to one word at a time somehow, or write a function
-// that splits each word apart then translates each to pig latin and puts it back together>
-// idk man I hate strings
-// words that start with a vowel will have hay added instead of first letter + "ay"
-// re reference the utf-8 encoding section.
+//I think I was heavily over complicating this originally. This is much more simple
+//Thank what I was planning.
+// Made sure to account for Capital/lowercase consonants
 
-fn main() {
-    println!("Hello, world!");
+use std::io;
+
+fn main () {
+    println!("Type a word to be translated: ");
+
+    let mut input = String::new();
+    io::stdin()
+    .read_line(&mut input)
+    .unwrap();
+    match input.chars().nth(0).unwrap() {
+        'a' | 'A' | 'e' | 'E' |'i' |'I' |'o' |'O' |'U' |'u' | 'y' | 'Y' =>
+        println!("{}-hay", input.trim()),
+        c => println!("{}-{}ay ", &input[c.len_utf8()..].trim(), c)
+    }
 }
